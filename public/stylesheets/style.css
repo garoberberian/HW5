@@ -2,13 +2,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: cursive;
+}
+
+body {
+    text-align: center;
+    max-width: calc(100% - 20px);
+    margin: 10px auto;
 }
 
 section {
-    text-align: center;
-    max-width: 700px;
+    max-width: 1000px;
     margin: auto;
-    border: 1px solid black;
 }
 
 h1 {
@@ -19,14 +24,13 @@ h1 {
     margin-bottom: 40px;
 }
 
-.task-container, .task-data {
+.task-container, .task-fields {
     margin-bottom: 20px;
 }
 
 .add-task-container, .task-container, .task-fields{
     display: flex;
     justify-content: space-around;
-
 }
 
 .task-title {
@@ -38,9 +42,50 @@ h1 {
 }
 
 .task-btn-delete{
+    max-width: 122px;
     flex: 1;
 }
 
 .complete{
     flex: 1;
+}
+
+#add-task-btn, .task-btn-delete {
+    padding: 2px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#add-task-btn {
+    border: 1px solid rgb(50, 210, 50);
+    background-color: rgb(50, 210, 50);
+}
+
+.task-btn-delete {
+    border: 1px solid rgb(201, 54, 54);
+    width: 100px;
+    background-color: rgb(201, 54, 54);
+}
+
+.task-field-date {
+    padding-left: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .add-task-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .add-task-container div {
+        margin-bottom: 10px;
+    }
+
+    #add-task-btn {
+        margin: auto;
+        padding: 4px 20px;
+    }
+
+    
 }
