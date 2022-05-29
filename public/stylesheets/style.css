@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.add-task-container {
+    margin-bottom: 40px;
+}
+
+.task-container, .task-data {
+    margin-bottom: 20px;
+}
+
+.add-task-container, .task-container, .task-fields{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.task-title {
+    flex: 1;
+}
+
+.task-date{
+    flex: 1;
+}
+
+.task-btn-delete{
+    flex: 1;
+}
+
+.complete{
+    flex: 1;
+}
