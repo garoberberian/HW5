@@ -1,8 +1,9 @@
 const express = require("express");
 const fs = require("fs/promises");
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
 const tasksRoute = require("./routes/tasksRoute.js");
+const { shouldRemind } = require('./helpers.js')
 
 const app = express();
 app.use(express.json());
@@ -24,30 +25,20 @@ app.listen(port, () => {
   console.log("listening to the server");
 });
 
-const shouldRemind = task => {
-  return task.dueDateParsed - Date.now() < 120000 &&
-        task.dueDateParsed - Date.now() > 0 &&
-        !task.reminded &&
-        !task.completed
-}
-
-setInterval( async () => {
+setInterval(async () => {
   let data, dataStr;
   try {
-    dataStr = await fs.readFile('./data.json');
-    data = JSON.parse(dataStr)
-  } catch(err) {
+    dataStr = await fs.readFile("./data.json");
+    data = JSON.parse(dataStr);
+  } catch (err) {
     console.log(err);
   }
-  
-  data.forEach(task => {
-    if(shouldRemind(task) ) {
+
+  data.forEach((task) => {
+    if (shouldRemind(task)) {
       console.log(`2 minutes left for ${task.title}`);
       task.reminded = true;
-      fs.writeFile('./data.json', JSON.stringify(data, undefined, 2));
+      fs.writeFile("./data.json", JSON.stringify(data, undefined, 2));
     }
-  })
-
+  });
 }, 2000);
-
-
