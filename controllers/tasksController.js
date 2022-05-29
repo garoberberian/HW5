@@ -8,7 +8,7 @@ exports.create = async (req, res, next) => {
     ...req.body,
     id: uuidv4(),
     reminded: false,
-    dueDateParsed: Date.parse(req.body.dueDate)
+    dueDateParsed: Date.parse(req.body.dueDate),
   };
 
   try {
@@ -18,9 +18,12 @@ exports.create = async (req, res, next) => {
     next({ statusCode: 400, message: "bad request" });
   }
 
-  const arr = [];
-  arr.push(...data, task);
-  fs.writeFile("./data.json", JSON.stringify(arr, undefined, 2));
+  if(req.body.title.length) {
+    const arr = [];
+    arr.push(...data, task);
+    fs.writeFile("./data.json", JSON.stringify(arr, undefined, 2));
+  }
+ 
 };
 
 exports.read = async (req, res, next) => {
@@ -44,12 +47,10 @@ exports.update = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
   let data = JSON.parse(await fs.readFile("./data.json", "utf8"));
-  const index = data.findIndex(task => task.id === req.params.id);
-  
+  const index = data.findIndex((task) => task.id === req.params.id);
+
   data.splice(index, 1);
 
   fs.writeFile("./data.json", JSON.stringify(data, undefined, 2));
-
   res.json({ error: false, message: "task successfully deleted" });
-
 };
